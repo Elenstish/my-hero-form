@@ -1,0 +1,19 @@
+<h1 myHeroId="my-hero-title">My Hero List</h1>
+
+<section class="my-hero">
+  <app-my-hero-filter (searchChanged)="onSearchChanged($event)"></app-my-hero-filter>
+
+  <ng-container *ngIf="(myHeroGroupList$ | async)?.length; else noComponents">
+    <app-my-hero-section *ngFor="let section of myHeroGroupList$ | async"
+                         [section]="section">
+    </app-my-hero-section>
+  </ng-container>
+
+  <ng-template #noComponents>
+    <p>There are no components</p>
+  </ng-template>
+</section>
+
+<ng-template [ngIf]="isLoading$ | async">
+  <mat-spinner class="loader" color="accent" diameter="60"></mat-spinner>
+</ng-template>
