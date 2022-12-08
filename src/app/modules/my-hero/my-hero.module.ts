@@ -5,6 +5,9 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { MyHeroStoreModule } from "./store/my-hero-store.module";
 import { MyHeroRoutingModule } from "./my-hero.routing-module";
@@ -28,6 +31,9 @@ import { MyHeroFilterComponent } from './components/my-hero-filter/my-hero-filte
     MatExpansionModule,
     MatIconModule,
     MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSnackBarModule,
     MyHeroStoreModule
   ]
 })
