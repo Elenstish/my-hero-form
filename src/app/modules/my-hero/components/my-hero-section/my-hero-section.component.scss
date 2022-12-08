@@ -1,0 +1,97 @@
+$color-light-grey: #eceff1;
+$color-dark-grey: #6a7383;
+
+:host {
+    display: block;
+    margin-bottom: 20px;
+
+    ::ng-deep {
+        .mat-expansion-panel {
+            padding: 0 30px;
+        }
+    }
+
+    .section-name .mat-icon {
+        margin-bottom: 16px;
+    }
+
+    .section-actions {
+        display: flex;
+
+        .section-search {
+            flex-grow: 1;
+            display: flex;
+        }
+
+        .add-field-button {
+            margin-left: 18px;
+        }
+    }
+
+    .field-headers {
+        display: flex;
+        padding: 0 42px 6px 33px;
+        border-bottom: 1px solid $color-light-grey;
+        text-transform: uppercase;
+        font-size: 10px;
+        color: $color-dark-grey;
+    }
+
+    .name-col {
+        flex-basis: 25%;
+    }
+
+    .synonym-col {
+        flex-basis: 35%;
+    }
+
+    .description-col {
+        flex-basis: 40%;
+    }
+
+    .field-panel {
+        display: block;
+        border-bottom: 1px solid $color-light-grey;
+    }
+
+    .fields-heading {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .field-content {
+        display: flex;
+        padding: 20px 42px 20px 33px;
+        background-color: $color-light-grey;
+
+        .field-item {
+            flex-grow: 1;
+
+            .item-title {
+                text-transform: uppercase;
+                font-size: 10px;
+                color: $color-dark-grey;
+            }
+        }
+    }
+
+    ::ng-deep {
+        mat-expansion-panel {
+            .mat-expansion-panel-header, .mat-expansion-panel-body {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        [aria-labelledby="mat-expansion-panel-header-0"] > .mat-expansion-panel-body {
+            padding-bottom: 28px;
+        }
+
+        & > inv-expansion-panel > mat-expansion-panel {
+            &:not(.mat-expanded) > .mat-expansion-panel-header {
+                border-bottom: 1px solid $color-light-grey;
+            }
+        }
+    }
+}

@@ -1,13 +1,20 @@
-import {MyHeroNode} from "./my-hero-interface.model";
+import { MyHeroNode } from "./my-hero-interface.model";
 
 export const MyHeroStateName = 'myHero';
 
 export interface MyHeroState {
-  myHeroListState: MyHeroListState;
+  myHeroListState: MyHeroNode[];
+  createMyHeroState: CreateMyHeroState;
 }
 
 export interface MyHeroListState {
-  isLoading: null | boolean,
+  isLoading: boolean,
   error: null | string,
   myHeroListState: MyHeroNode[];
+}
+
+export interface CreateMyHeroState {
+  isLoading: boolean,
+  error: null | string,
+  id: null | string;
 }

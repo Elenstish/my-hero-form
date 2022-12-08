@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { delay } from "rxjs/operators";
 
-import {MyHeroId, MyHeroNode} from "../../models/my-hero-interface.model";
-import {MyHeroList} from "../../constants/my-hero-list-temp.constants";
+import { MyHeroId, MyHeroNode } from "../../models/my-hero-interface.model";
+import { MyHeroList } from "../../constants/my-hero-list-temp.constants";
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,6 @@ export class MyHeroApiService {
   }
 
   public getMyHeroList(): Observable<MyHeroNode[]> {
-    return of(MyHeroList);
+    return of(MyHeroList).pipe(delay(1500));
   }
 }

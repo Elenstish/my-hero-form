@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
 import { MyHeroStoreModule } from "./store/my-hero-store.module";
 import { MyHeroRoutingModule } from "./my-hero.routing-module";
@@ -21,7 +24,10 @@ import { MyHeroFilterComponent } from './components/my-hero-filter/my-hero-filte
     CommonModule,
     ReactiveFormsModule,
     MyHeroRoutingModule,
-    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatButtonModule,
     MyHeroStoreModule
   ]
 })

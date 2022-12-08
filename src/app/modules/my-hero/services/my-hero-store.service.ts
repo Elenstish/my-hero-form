@@ -6,11 +6,11 @@ import { MyHeroState } from "../models/my-hero-state.model";
 import { MyHeroNode } from "../models/my-hero-interface.model";
 import { createMyHero, getMyHeroList } from "../store/actions";
 import {
-  selectMyHeroList,
-  selectMyHeroListError,
-  selectMyHeroListIsLoading
+  selectCreateMyHeroError,
+  selectCreateMyHeroSuccess,
+  selectMyHeroList
 } from "../store/selectors";
-
+import { ActionsListenerService } from "./action-listener.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ import {
 export class MyHeroStoreService {
 
   constructor(
+      private actionsListener: ActionsListenerService,
     private store: Store<MyHeroState>
   ) { }
 
@@ -25,19 +26,23 @@ export class MyHeroStoreService {
     this.store.dispatch(createMyHero({ payload: myHero }));
   }
 
+  public createMyHeroSuccessAction$(): Observable<string | null> {
+    return this.store.pipe(select(selectCreateMyHeroSuccess));
+  }
+
   public createMyHeroFailureAction$(): Observable<string | null> {
-    return this.store.pipe(select(selectMyHeroListError));
+    return this.store.pipe(select(selectCreateMyHeroError));
   }
 
   public getMyHeroList(): void {
     this.store.dispatch(getMyHeroList());
   }
 
-  public getMyHeroListProgress$(): Observable<boolean> {
-    return this.store.pipe(select(selectMyHeroListIsLoading));
-  }
-
   public selectMyHeroList$(): Observable<MyHeroNode[]> {
     return this.store.pipe(select(selectMyHeroList));
+  }
+
+  public getMyHeroListProgress$(): Observable<boolean> {
+    return this.actionsListener.getProgressStatus(getMyHeroList);
   }
 }

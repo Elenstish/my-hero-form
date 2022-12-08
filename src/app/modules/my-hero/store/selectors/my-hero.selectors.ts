@@ -1,21 +1,22 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 
-import { MyHeroListState, MyHeroStateName } from "../../models/my-hero-state.model";
+import { CreateMyHeroState, MyHeroState, MyHeroStateName } from "../../models/my-hero-state.model";
 import { MyHeroNode } from "../../models/my-hero-interface.model";
 
-export const selectMyHeroState = createFeatureSelector<MyHeroListState>(MyHeroStateName);
+export const selectMyHeroListState = createFeatureSelector<MyHeroState>(MyHeroStateName);
+export const selectCreateMyHeroState = createFeatureSelector<CreateMyHeroState>(MyHeroStateName);
 
 export const selectMyHeroList: MemoizedSelector<object, MyHeroNode[]> = createSelector(
-    selectMyHeroState,
-  (state: MyHeroListState): MyHeroNode[] => state.myHeroListState
+    selectMyHeroListState,
+  (state: MyHeroState): MyHeroNode[] => state.myHeroListState
 );
 
-export const selectMyHeroListIsLoading = createSelector(
-    selectMyHeroState,
-    (state: MyHeroListState) => state.isLoading
+export const selectCreateMyHeroSuccess = createSelector(
+    selectCreateMyHeroState,
+    (state: CreateMyHeroState) => state.id
 );
 
-export const selectMyHeroListError = createSelector(
-    selectMyHeroState,
-    (state: MyHeroListState) => state.error
+export const selectCreateMyHeroError = createSelector(
+    selectCreateMyHeroState,
+    (state: CreateMyHeroState) => state.error
 );

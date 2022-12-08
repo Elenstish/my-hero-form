@@ -24,14 +24,15 @@ export class MyHeroEffects {
       )
   );
 
-  public getmyHeroList$ = createEffect(() => this.actions$
+  public getMyHeroList$ = createEffect(() => this.actions$
     .pipe(
       ofType(actions.getMyHeroList),
       exhaustMap(() =>
         this.myHeroApiService.getMyHeroList()
           .pipe(
             map((list: MyHeroNode[]) =>
-              actions.getMyHeroListSuccess({ items: list })),
+                actions.getMyHeroListSuccess({ items: list })
+              ),
             catchError((error: HttpErrorResponse) => of(actions.getMyHeroListFailure({ error })))
           )
       )
