@@ -1,12 +1,19 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from "./app-routing-module";
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { ActionReducerMap, StoreModule } from "@ngrx/store";
+import {HttpClientModule} from "@angular/common/http";
+
+export interface RootState {
+  [key: string]: any;
+}
+
+export const reducers: ActionReducerMap<RootState> = {};
 
 @NgModule({
   declarations: [
@@ -16,9 +23,10 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    HttpClientModule,
     EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forRoot(reducers),
   ],
   providers: [],
   bootstrap: [AppComponent]

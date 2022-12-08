@@ -1,5 +1,5 @@
-import {DescriptionTextMaxLength, StandardInputMaxLength} from "./validation.constants";
-import {PredefinedValidationMessages} from "../models/validation.models";
+import { DescriptionTextMaxLength, StandardInputMaxLength } from "./validation.constants";
+import { PredefinedValidationMessages } from "../models/validation.models";
 
 export const MyHeroFomFieldErrors: PredefinedValidationMessages = {
   name: {

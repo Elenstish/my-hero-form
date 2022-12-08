@@ -8,9 +8,8 @@ import * as actions from '../actions/my-hero.actions';
 import { MyHeroApiService } from "../../services/api/my-hero-api.service";
 import {MyHeroId, MyHeroNode} from "../../models/my-hero-interface.model";
 
-
-
 @Injectable()
+
 export class MyHeroEffects {
   public createMyhero$ = createEffect(() =>
     this.actions$

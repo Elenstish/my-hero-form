@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable, Subject } from "rxjs";
 
-import {MyHeroList, MyHeroNode} from "../../models/my-hero-interface.model";
-import {MyHeroStoreService} from "../../services/my-hero-store.service";
+import { MyHeroList, MyHeroNode } from "../../models/my-hero-interface.model";
+import { MyHeroStoreService } from "../../services/my-hero-store.service";
 
 @Component({
   selector: 'app-my-hero-list',
