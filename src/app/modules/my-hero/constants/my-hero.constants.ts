@@ -1,6 +1,6 @@
-import {MyHeroType} from "../models/my-hero-interface.model";
-import {PredefinedValidationMessages} from "../models/validation.models";
-import {StandardInputMaxLength} from "./validation.constants";
+import { MyHeroType } from "../models/my-hero-interface.model";
+import { PredefinedValidationMessages } from "../validators/validation.models";
+import { StandardInputMaxLength } from "../validators/validation.constants";
 
 type MyHeroOptionType = {
   [k in fieldTypes]: string[]

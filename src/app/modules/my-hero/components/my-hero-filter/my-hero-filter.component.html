@@ -2,24 +2,23 @@
       (keydown.enter)="searchControl.value ? setSearch() : $event.preventDefault()"
       autocomplete="off"
       class="search-form">
-  <div class="search-wrap">
-    <mat-form-field  class="search-input-field">
-      <mat-icon color="primary" matPrefix>search</mat-icon>
-      <mat-label>Type to search</mat-label>
-      <input matInput type="text" [formControl]="getControl('search')">
-      <button *ngIf="searchControl.value !== ''" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
-        <mat-icon color="primary" >close</mat-icon>
-      </button>
-    </mat-form-field>
-
-    <button mat-flat-button color="primary"
-            (click)="setSearch()"
-            [disabled]="!searchControl.value">
-      Search
+  <mat-form-field  class="search-wrap">
+    <mat-icon color="primary" matPrefix>search</mat-icon>
+    <mat-label>Type to search</mat-label>
+    <input matInput type="text" [formControl]="getControl('search')">
+    <button *ngIf="searchControl.value !== ''" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+      <mat-icon color="primary" >close</mat-icon>
     </button>
-  </div>
+  </mat-form-field>
 
   <div class="button-toggle">
+    <button mat-flat-button color="primary" matSuffix
+          type="button"
+          (click)="setSearch()"
+          [disabled]="!searchControl.value">
+      Search
+    </button>
+
     <button mat-flat-button color="primary"
             (click)="openMyFormDialog()">
       + Add New Element

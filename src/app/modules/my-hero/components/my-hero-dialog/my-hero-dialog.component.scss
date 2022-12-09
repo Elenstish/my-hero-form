@@ -1,0 +1,188 @@
+$color-light-pink: #fdeded;
+$color-light-grayish-orange: #fdf4ed;
+$color-light-grey: #eceff1;
+$color-yellow: #e8c356;
+$color-red: #ef5350;
+
+section {
+  max-height: 98vh;
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+p {
+  margin-bottom: 20px;
+  padding: 0 24px;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-icon {
+  overflow: visible;
+}
+
+.my-hero {
+  &-id {
+    ::ng-deep {
+      mat-label {
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 12.2px;
+      }
+
+      .mat-mdc-form-field-flex {
+        background-color: transparent;
+      }
+    }
+
+    &.ng-invalid {
+      ::ng-deep {
+        .mat-form-field-flex {
+          background-color: $color-light-pink;
+          padding-left: 10.5px;
+        }
+      }
+    }
+  }
+
+  &-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .check-format {
+      margin-left: 30px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &-end {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin-bottom: 20px;
+    }
+  }
+
+  &-length-input {
+    width: 48%;
+  }
+
+  &-list-input {
+    width: 90%;
+  }
+
+  &-icon {
+    margin-bottom: 22px;
+  }
+
+  &-warning-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 18px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .hint-text {
+      margin-left: 20px;
+      margin-right: auto;
+    }
+
+    .remove-warning {
+      cursor: pointer;
+      color: #90A4AE;
+      margin-left: 20px;
+    }
+  }
+
+  &-warning {
+    background-color: $color-light-grayish-orange;
+
+    .icon-warning {
+      color: $color-yellow;
+    }
+  }
+
+  &-alert {
+    background: rgba($color-red, .1);
+
+    .icon-alert-warning {
+      color: $color-red;
+    }
+
+    &-top {
+      margin-top: 0
+    }
+  }
+
+  &-divider {
+    height: 1px;
+    background-color: $color-light-grey;
+  }
+}
+
+.dialog-content {
+  margin-top: 20px;
+
+  @media screen and (min-height: 800px) {
+    max-height: 59vh;
+    overflow: auto;
+  }
+
+  @media screen and (min-height: 960px) {
+    max-height: 64vh;
+  }
+
+  @media screen and (min-height: 1080px) {
+    max-height: 68vh;
+  }
+
+  &.with-warning {
+    @media screen and (min-height: 800px) {
+      max-height: 42vh;
+    }
+
+    @media screen and (min-height: 960px) {
+      max-height: 51vh;
+    }
+
+    @media screen and (min-height: 1080px) {
+      max-height: 55vh;
+    }
+  }
+
+  &.with-full-warning {
+    @media screen and (min-height: 800px) {
+      max-height: 32vh;
+    }
+
+    @media screen and (min-height: 960px) {
+      max-height: 42vh;
+    }
+
+    @media screen and (min-height: 1080px) {
+      max-height: 48vh;
+    }
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  button {
+    margin: 0 10px;
+    flex-shrink: 0;
+  }
+}

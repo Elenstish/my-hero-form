@@ -9,39 +9,13 @@ $desktop: "(min-width: 1024px)";
     flex-direction: row;
   }
 
-  .search-wrap,
-  .search-input-field {
+  .search-wrap {
     display: flex;
     flex: 1 0 auto;
-  }
-
-  .search-wrap {
     align-items: center;
-
-    button {
-      margin-bottom: 22px;
-    }
   }
 
   .button-toggle {
-    display: flex;
-    flex-shrink: 0;
-    margin-left: 0;
     margin-bottom: 22px;
-
-    @media #{$desktop} {
-      margin-left: 20px;
-    }
-
-    .mat-button {
-      margin: 0 0 0 2px;
-
-      &::ng-deep {
-        .mat-button {
-          border-radius: 4px;
-          padding: 0 20px;
-        }
-      }
-    }
   }
 }

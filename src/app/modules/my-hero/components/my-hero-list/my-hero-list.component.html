@@ -2,9 +2,9 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-template>
 
-<h1 myHeroId="my-hero-title">My Hero List</h1>
-
 <section class="my-hero">
+  <h1 myHeroId="my-hero-title">My Hero List</h1>
+
   <app-my-hero-filter (searchChanged)="onSearchChanged($event)"></app-my-hero-filter>
 
   <ng-container *ngIf="(myHeroGroupList$ | async)?.length || !!(isLoading$ | async); else noComponents">

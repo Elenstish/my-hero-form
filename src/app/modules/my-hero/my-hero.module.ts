@@ -8,6 +8,12 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { TextFieldModule } from "@angular/cdk/text-field";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { MyHeroStoreModule } from "./store/my-hero-store.module";
 import { MyHeroRoutingModule } from "./my-hero.routing-module";
@@ -34,6 +40,12 @@ import { MyHeroFilterComponent } from './components/my-hero-filter/my-hero-filte
     MatInputModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    TextFieldModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatFormFieldModule,
     MyHeroStoreModule
   ]
 })

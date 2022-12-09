@@ -1,1 +1,220 @@
-<p>my-hero-dialog works!</p>
+<section>
+  <h1 mat-dialog-title>{{isEditMode ? 'Edit' : 'Add New'}} Element</h1>
+  <p>
+    Fill in the form below to {{isEditMode ? 'update' : 'add'}} element parameters
+  </p>
+
+  <div class="my-hero-divider my-hero-full-width"></div>
+
+  <form [formGroup]="myHeroForm"
+        (ngSubmit)="submitForm()">
+    <mat-dialog-content class="dialog-content"
+         [class.with-warning]="isShowWarning || errorMessage"
+         [class.with-full-warning]="isShowWarning && errorMessage">
+
+      <div class="my-hero-warning-wrap my-hero-alert my-hero-alert-top"
+           *ngIf="errorElementIDMessage">
+        <mat-icon class="icon-alert-warning">warning</mat-icon>
+        <span class="hint-text">{{ errorElementIDMessage }}</span>
+        <mat-icon class="remove-warning" (click)="closeErrorBanner()">clear</mat-icon>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Element Name</mat-label>
+          <mat-icon matPrefix>short_text</mat-icon>
+          <input matInput type="text" [formControl]="getControl('myHeroForm', 'name')" required>
+          <mat-error *ngIf="myHeroForm.controls['name'].invalid && myHeroForm.controls['name'].touched">
+            {{getError('myHeroForm', 'name')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Refers To</mat-label>
+          <mat-icon matPrefix>view_agenda</mat-icon>
+          <input matInput type="text" [matAutocomplete]="auto" required
+                 [formControl]="getControl('myHeroForm', 'groupName')">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredComponentsName$ | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="myHeroForm.controls['groupName'].invalid && myHeroForm.controls['groupName'].touched">
+            {{getError('myHeroForm', 'groupName')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="my-hero-id">
+          <mat-label>Data Element ID</mat-label>
+          <mat-icon matPrefix>short_text</mat-icon>
+          <input matInput type="text"
+                 [readonly]="true"
+                 [formControl]="getControl('myHeroForm', 'propertyId')">
+          <mat-error *ngIf="myHeroForm.controls['propertyId'].invalid && myHeroForm.controls['propertyId'].touched">
+            {{getError('myHeroForm', 'propertyId')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div [formGroupName]="'type'">
+        <mat-form-field appearance="fill">
+          <mat-label>Type</mat-label>
+          <mat-icon matPrefix>label</mat-icon>
+          <mat-select required [formControl]="getControl('typeGroup', 'typeName')">
+            <mat-option>Select Type</mat-option>
+            <mat-option *ngFor="let item of types" [value]="item.typeName">{{item.typeLabel}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="typeGroup.controls['typeName'].invalid && typeGroup.controls['typeName'].touched">
+            {{getError('typeGroup', 'typeName')}}
+          </mat-error>
+        </mat-form-field>
+
+        <div *ngIf="fieldFormats?.length" class="my-hero-between">
+          <mat-form-field appearance="fill">
+            <mat-label>Field Format</mat-label>
+            <mat-icon matPrefix>keyboard_arrow_right</mat-icon>
+            <mat-select [formControl]="getControl('typeGroup', 'format')">
+              <mat-option *ngFor="let item of fieldFormats" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="typeGroup.controls['format'].invalid && typeGroup.controls['format'].touched">
+              {{getError('typeGroup', 'format')}}
+            </mat-error>
+          </mat-form-field>
+
+          <ng-template [ngIf]="!typeGroup.get('typeName').value?.includes('Date')">
+            <mat-checkbox class="check-format"
+                          [formControl]="getControl('typeGroup', 'isNegative')">
+              Negative Value
+            </mat-checkbox>
+          </ng-template>
+        </div>
+
+        <div *ngIf="typeGroup.get('typeName').value?.includes('Text')" class="my-hero-between">
+          <mat-form-field class="my-hero-length-input">
+            <mat-label>Min Length*</mat-label>
+            <mat-icon matPrefix>keyboard_arrow_right</mat-icon>
+            <input matInput type="number"
+                   [formControl]="getControl('typeGroup', 'minLength')">
+            <mat-error *ngIf="typeGroup.controls['minLength'].invalid && typeGroup.controls['minLength'].touched">
+              {{getError('typeGroup', 'minLength')}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="my-hero-length-input">
+            <mat-label>Max Length*</mat-label>
+            <mat-icon matPrefix>keyboard_arrow_right</mat-icon>
+            <input matInput type="number"
+                   [errorStateMatcher]="lengthMatcher"
+                   [formControl]="getControl('typeGroup', 'maxLength')">
+            <mat-error *ngIf="typeGroup.controls['maxLength'].invalid && typeGroup.controls['maxLength'].touched ||
+                        typeGroup.hasError('incorrect')">
+              {{getError('typeGroup', 'maxLength')}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="typeGroup.get('typeName').value === ('List')">
+          <p>
+            Specify list options:
+          </p>
+
+          <div *ngFor="let folder of fieldsControl.controls; let i = index"
+               class="my-hero-between">
+            <mat-form-field class="my-hero-list-input">
+              <mat-label>List Option Name</mat-label>
+              <mat-icon matPrefix>arrow_right_alt</mat-icon>
+              <input matInput type="text"
+                     [formControl]="getControl('typeGroup','options', i)">
+              <mat-error *ngIf="typeGroup.get('options')?.invalid &&
+                     typeGroup.get('options')?.touched">
+                {{getError('typeGroup', 'options', i)}}
+              </mat-error>
+            </mat-form-field>
+
+            <div [matTooltip]="(fieldsControl.controls.length === 1) ? formFieldsErrors['options']['required'] : ''">
+              <button mat-icon-button color="primary" type="button"
+                      class="my-hero-icon"
+                      [disabled]="fieldsControl.controls.length === 1"
+                      (click)="removeNewField(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="my-hero-end">
+            <button mat-raised-button color="primary" type="button"
+                    (click)="addNewField()">
+              + Add new list option
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Search terms</mat-label>
+          <mat-icon matPrefix>text_format</mat-icon>
+          <input matInput type="text"
+                 [formControl]="getControl('myHeroForm', 'synonyms')">
+          <mat-error *ngIf="myHeroForm.controls['synonyms'].invalid && myHeroForm.controls['synonyms'].touched">
+            {{getError('myHeroForm', 'synonyms')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <mat-icon matPrefix>notes</mat-icon>
+          <textarea matInput
+                    [formControl]="getControl('myHeroForm', 'description')"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="5"></textarea>
+          <mat-error *ngIf="myHeroForm.controls['description'].invalid && myHeroForm.controls['description'].touched">
+            {{getError('myHeroForm', 'description')}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <div class="my-hero-divider my-hero-full-width"></div>
+
+    <div class="my-hero-warning-wrap my-hero-alert" *ngIf="errorMessage">
+      <mat-icon class="icon-alert-warning">warning</mat-icon>
+      <span class="hint-text">{{ errorMessage }}</span>
+      <mat-icon class="remove-warning" (click)="closeErrorBanner()">clear</mat-icon>
+    </div>
+
+    <div class="my-hero-warning-wrap my-hero-warning" *ngIf="isShowWarning">
+      <mat-icon class="icon-warning">warning</mat-icon>
+      <span class="hint-text">
+          Please, double-check the information you have entered because Element attributes except the “Refer to” can’t be edited.
+        </span>
+      <mat-icon class="remove-warning" (click)="closeBanner()">clear</mat-icon>
+    </div>
+
+    <div class="my-hero-divider" *ngIf="isShowWarning || errorMessage"></div>
+
+    <mat-dialog-actions class="dialog-actions">
+      <mat-checkbox [formControl]="getControl('myHeroForm', 'isClone')">
+        Create Another Element
+      </mat-checkbox>
+
+      <div>
+        <button mat-stroked-button color="primary" type="button"
+                (click)="cancel()">
+          Cancel
+        </button>
+        <button mat-flat-button color="primary" type="submit"
+                [disabled]="!myHeroForm.valid || (isLoading$ | async)">
+          Submit
+        </button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</section>

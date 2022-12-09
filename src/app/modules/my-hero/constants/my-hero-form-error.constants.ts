@@ -1,5 +1,5 @@
-import { DescriptionTextMaxLength, StandardInputMaxLength } from "./validation.constants";
-import { PredefinedValidationMessages } from "../models/validation.models";
+import { DescriptionTextMaxLength, StandardInputMaxLength } from "../validators/validation.constants";
+import { PredefinedValidationMessages } from "../validators/validation.models";
 
 export const MyHeroFomFieldErrors: PredefinedValidationMessages = {
   name: {
@@ -45,6 +45,6 @@ export const MyHeroFomFieldErrors: PredefinedValidationMessages = {
   }
 };
 
-export const DataDictionaryPropertyIdError = 'This Data Element ID is already taken. The Data Element ID generated ' +
+export const MyHeroPropertyIdError = 'This Data Element ID is already taken. The Data Element ID generated ' +
   'must be unique. Please enter a different [Element Name] or change the selection in the [Refers To] field to ' +
   'create a unique Data Element ID.';

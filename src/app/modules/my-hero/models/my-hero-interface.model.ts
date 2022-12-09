@@ -36,7 +36,7 @@ export interface MyHeroType {
   typeLabel: string;
 }
 
-export interface MyHeroyAfterCloseValue {
+export interface MyHeroAfterCloseValue {
   name: string;
   isClone: boolean;
 }

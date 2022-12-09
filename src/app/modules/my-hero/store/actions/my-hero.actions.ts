@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 
 import { MyHeroId, MyHeroNode } from "../../models/my-hero-interface.model";
-import { getFailureTypeAction, getSuccessTypeAction } from "../constants/get-action-type.constants";
+import { getFailureType, getSuccessType } from "../constants/get-action-type.constants";
 
 const myHeroActionTypes = {
   createMyHero: '[My Hero] Create My Hero',
@@ -15,23 +15,23 @@ export const createMyHero = createAction(
 );
 
 export const createMyHeroSuccess = createAction(
-  getSuccessTypeAction(myHeroActionTypes.createMyHero),
+  getSuccessType(myHeroActionTypes.createMyHero),
   props<MyHeroId>()
 );
 
 export const createMyHeroFailure = createAction(
-  getFailureTypeAction(myHeroActionTypes.createMyHero),
+  getFailureType(myHeroActionTypes.createMyHero),
   props<{ error: HttpErrorResponse }>()
 );
 
 export const getMyHeroList = createAction(myHeroActionTypes.getMyHeroList);
 
 export const getMyHeroListSuccess = createAction(
-  getSuccessTypeAction(myHeroActionTypes.getMyHeroList),
+  getSuccessType(myHeroActionTypes.getMyHeroList),
   props<{ items: MyHeroNode[] }>()
 );
 
 export const getMyHeroListFailure = createAction(
-  getFailureTypeAction(myHeroActionTypes.getMyHeroList),
+  getFailureType(myHeroActionTypes.getMyHeroList),
   props<{ error: HttpErrorResponse }>()
 );

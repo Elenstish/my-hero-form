@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -6,13 +6,14 @@ import { Subject } from "rxjs";
 import { filter, take, takeUntil } from "rxjs/operators";
 
 import { MyHeroDialogComponent } from "../my-hero-dialog/my-hero-dialog.component";
-import { MyHeroyAfterCloseValue } from "../../models/my-hero-interface.model";
+import { MyHeroAfterCloseValue } from "../../models/my-hero-interface.model";
 
 
 @Component({
   selector: 'app-my-hero-filter',
   templateUrl: './my-hero-filter.component.html',
-  styleUrls: ['./my-hero-filter.component.scss']
+  styleUrls: ['./my-hero-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyHeroFilterComponent implements OnInit, OnDestroy {
   @Output()
@@ -40,6 +41,7 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
   }
 
   public clear(): void {
+    this.searchControl.setValue('');
     this.searchChanged.emit('');
   }
 
@@ -61,11 +63,15 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
             filter(data => !!data),
             take(1)
         )
-        .subscribe((data: MyHeroyAfterCloseValue) => {
+        .subscribe((data: MyHeroAfterCloseValue) => {
           if (data.isClone) {
             this.openMyFormDialog();
           }
-          this.snackBar.open(`${data.name} Element was successfully added`);
+          this.snackBar.open(
+              `${data.name} Element was successfully added`,
+              'x',
+              { duration: 5000 }
+              );
         });
   }
 

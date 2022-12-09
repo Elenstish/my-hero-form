@@ -17,11 +17,14 @@ export class MyHeroApiService {
   ) {}
 
   public createMyHero(payload: MyHeroNode): Observable<MyHeroId> {
-    const url: string = ('/my-hero');
-
-    return this.httpClient.post<MyHeroId>(url, payload, {
-      headers: new HttpHeaders({ 'ignore-error-notifications': 'yes' })
-    });
+    const myHeroId: MyHeroId = {
+      id: '1'
+    };
+    return of(myHeroId).pipe(delay(1000));
+    // const url: string = ('/my-hero');
+    // return this.httpClient.post<MyHeroId>(url, payload, {
+    //   headers: new HttpHeaders({ 'ignore-error-notifications': 'yes' })
+    // });
   }
 
   public getMyHeroList(): Observable<MyHeroNode[]> {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable, Subject } from "rxjs";
 import { filter, map, take } from "rxjs/operators";
 
@@ -8,7 +8,8 @@ import { MyHeroStoreService } from "../../services/my-hero-store.service";
 @Component({
   selector: 'app-my-hero-list',
   templateUrl: './my-hero-list.component.html',
-  styleUrls: ['./my-hero-list.component.scss']
+  styleUrls: ['./my-hero-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyHeroListComponent {
   public isLoading$: Observable<boolean>;
