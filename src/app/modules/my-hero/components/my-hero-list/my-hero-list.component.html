@@ -5,7 +5,7 @@
 <section class="my-hero">
   <h1 myHeroId="my-hero-title">My Hero List</h1>
 
-  <app-my-hero-filter (searchChanged)="onSearchChanged($event)"></app-my-hero-filter>
+  <app-my-hero-filter [myHeroList]="(myHeroList$ | async)"></app-my-hero-filter>
 
   <ng-container *ngIf="(myHeroGroupList$ | async)?.length || !!(isLoading$ | async); else noComponents">
     <app-my-hero-section *ngFor="let section of myHeroGroupList$ | async"

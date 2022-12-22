@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { MyHeroState } from "../models/my-hero-state.model";
 import { MyHeroNode } from "../models/my-hero-interface.model";
-import { createMyHero, getMyHeroList } from "../store/actions";
+import { createMyHero, getMyHeroList, getSearch } from "../store/actions";
 import {
   selectCreateMyHeroFailure, selectCreateMyHeroLoading,
   selectCreateMyHeroSuccess,
@@ -49,5 +49,9 @@ export class MyHeroStoreService {
 
   public getMyHeroListProgress$(): Observable<boolean> {
     return this.store.pipe(select(selectMyHeroListLoading));
+  }
+
+  public getSearch(search: string): void {
+    this.store.dispatch(getSearch({ payload: search }));
   }
 }

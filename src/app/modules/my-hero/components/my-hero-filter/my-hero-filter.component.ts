@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { FormBuilder, FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subject } from "rxjs";
 import { filter, take, takeUntil } from "rxjs/operators";
 
 import { MyHeroDialogComponent } from "../my-hero-dialog/my-hero-dialog.component";
-import { MyHeroAfterCloseValue } from "../../models/my-hero-interface.model";
+import { MyHeroAfterCloseValue, MyHeroNode } from "../../models/my-hero-interface.model";
 import { MyHeroStoreService } from "../../services/my-hero-store.service";
 
 
@@ -17,11 +17,9 @@ import { MyHeroStoreService } from "../../services/my-hero-store.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyHeroFilterComponent implements OnInit, OnDestroy {
-  @Output()
-  searchChanged: EventEmitter<string> = new EventEmitter<string>();
-
-  public filterForm: FormGroup;
-  public searchControl: AbstractControl;
+  @Input()
+  public myHeroList: MyHeroNode[];
+  public searchControl: FormControl = new FormControl('');
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -34,7 +32,6 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.initForm();
     this.resetSearch();
   }
 
@@ -45,15 +42,11 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
 
   public clear(): void {
     this.searchControl.setValue('');
-    this.searchChanged.emit('');
+    this.myHeroStoreService.getSearch(this.searchControl.getRawValue());
   }
 
   public setSearch(): void {
-    this.searchChanged.emit(this.searchControl.value);
-  }
-
-  public getControl(field: string): FormControl {
-    return this.filterForm.get(field) as FormControl;
+    this.myHeroStoreService.getSearch(this.searchControl.getRawValue());
   }
 
   public openMyFormDialog(): void {
@@ -86,13 +79,5 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
         filter(search => !search),
         takeUntil(this.destroy$)
     ).subscribe(() => this.setSearch());
-  }
-
-  private initForm(): void {
-    this.filterForm = this.fb.group({
-      search: [{ value: '', disabled: true }]
-    });
-
-    this.searchControl = this.getControl('search');
   }
 }

@@ -6,7 +6,8 @@ import { getFailureType, getSuccessType } from "../constants/get-action-type.con
 
 const myHeroActionTypes = {
   createMyHero: '[My Hero] Create My Hero',
-  getMyHeroList: '[My Hero] Get My Hero List'
+  getMyHeroList: '[My Hero] Get My Hero List',
+  filterMyHeroList: '[My Hero] Filter My Hero List'
 };
 
 export const createMyHero = createAction(
@@ -34,4 +35,9 @@ export const getMyHeroListSuccess = createAction(
 export const getMyHeroListFailure = createAction(
   getFailureType(myHeroActionTypes.getMyHeroList),
   props<{ error: HttpErrorResponse }>()
+);
+
+export const getSearch = createAction(
+  myHeroActionTypes.filterMyHeroList,
+  props<{ payload: string }>()
 );

@@ -1,13 +1,20 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { getMyHeroListSuccess } from "../actions";
+import { getMyHeroListSuccess, getSearch } from "../actions";
 import { MyHeroNode } from "../../models/my-hero-interface.model";
 
 const initialState: MyHeroNode[] = [];
+let myHeroList: MyHeroNode[] = [];
 
 const reducer = createReducer<MyHeroNode[]>(
     initialState,
-    on(getMyHeroListSuccess, (state, { items }) => items)
+    on(getMyHeroListSuccess, (state, { items }) => {
+      myHeroList = items;
+      return items;
+    }),
+    on(getSearch, (state, { payload }) =>
+      myHeroList.filter(item => item.name.toLowerCase().includes(payload.toLowerCase()))
+    )
 );
 
 export function myHeroListReducer(state: MyHeroNode[], action: Action) {
