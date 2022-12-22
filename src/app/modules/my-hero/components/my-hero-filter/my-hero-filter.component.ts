@@ -7,6 +7,7 @@ import { filter, take, takeUntil } from "rxjs/operators";
 
 import { MyHeroDialogComponent } from "../my-hero-dialog/my-hero-dialog.component";
 import { MyHeroAfterCloseValue } from "../../models/my-hero-interface.model";
+import { MyHeroStoreService } from "../../services/my-hero-store.service";
 
 
 @Component({
@@ -27,8 +28,10 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
   constructor(
       private fb: FormBuilder,
       private dialog: MatDialog,
-      private snackBar: MatSnackBar
-  ) { }
+      private snackBar: MatSnackBar,
+	  private myHeroStoreService: MyHeroStoreService
+  ) {
+  }
 
   public ngOnInit(): void {
     this.initForm();
@@ -64,9 +67,12 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
             take(1)
         )
         .subscribe((data: MyHeroAfterCloseValue) => {
+          this.myHeroStoreService.getMyHeroList();
+
           if (data.isClone) {
             this.openMyFormDialog();
           }
+
           this.snackBar.open(
               `${data.name} Element was successfully added`,
               'x',

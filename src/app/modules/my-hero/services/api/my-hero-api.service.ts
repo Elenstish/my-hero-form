@@ -11,16 +11,19 @@ import { MyHeroList } from "../../constants/my-hero-list-temp.constants";
   providedIn: 'root'
 })
 export class MyHeroApiService {
+  public myHeroItem: MyHeroNode;
+  private newMyHeroList: MyHeroNode[] = [];
 
   constructor(
       public httpClient: HttpClient
   ) {}
 
   public createMyHero(payload: MyHeroNode): Observable<MyHeroId> {
+    this.myHeroItem = payload;
     const myHeroId: MyHeroId = {
       id: '1'
     };
-    return of(myHeroId).pipe(delay(1000));
+    return of(myHeroId).pipe(delay(500));
     // const url: string = ('/my-hero');
     // return this.httpClient.post<MyHeroId>(url, payload, {
     //   headers: new HttpHeaders({ 'ignore-error-notifications': 'yes' })
@@ -28,6 +31,8 @@ export class MyHeroApiService {
   }
 
   public getMyHeroList(): Observable<MyHeroNode[]> {
-    return of(MyHeroList).pipe(delay(1500));
+    this.newMyHeroList = this.myHeroItem ? [ ...this.newMyHeroList, this.myHeroItem] : [ ...MyHeroList ];
+
+    return of(this.newMyHeroList).pipe(delay(500));
   }
 }
