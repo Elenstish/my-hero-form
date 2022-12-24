@@ -3,7 +3,7 @@ import { Observable, Subject } from "rxjs";
 import { filter, map, take } from "rxjs/operators";
 
 import { MyHeroList, MyHeroNode } from "../../models/my-hero-interface.model";
-import { MyHeroStoreService } from "../../services/my-hero-store.service";
+import { MyHeroStoreService } from "../../store/services/my-hero-store.service";
 
 @Component({
   selector: 'app-my-hero-list',

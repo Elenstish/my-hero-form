@@ -12,7 +12,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import {distinctUntilChanged, filter, map, startWith, take, takeUntil} from "rxjs/operators";
 
-import { MyHeroStoreService } from "../../services/my-hero-store.service";
+import { MyHeroStoreService } from "../../store/services/my-hero-store.service";
 import {
   MyHero,
   MyHeroAfterCloseValue,

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 
-import { MyHeroState, MyHeroStateName } from "../../models/my-hero-state.model";
+import { MyHeroState, MyHeroStateName } from "../models/my-hero-state.model";
 import { MyHeroNode } from "../../models/my-hero-interface.model";
 
 export const selectMyHeroListState = createFeatureSelector<MyHeroState>(MyHeroStateName);

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { FormBuilder, FormControl } from "@angular/forms";
+import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subject } from "rxjs";
@@ -7,7 +7,7 @@ import { filter, take, takeUntil } from "rxjs/operators";
 
 import { MyHeroDialogComponent } from "../my-hero-dialog/my-hero-dialog.component";
 import { MyHeroAfterCloseValue, MyHeroNode } from "../../models/my-hero-interface.model";
-import { MyHeroStoreService } from "../../services/my-hero-store.service";
+import { MyHeroStoreService } from "../../store/services/my-hero-store.service";
 
 
 @Component({
@@ -24,7 +24,6 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-      private fb: FormBuilder,
       private dialog: MatDialog,
       private snackBar: MatSnackBar,
 	  private myHeroStoreService: MyHeroStoreService
