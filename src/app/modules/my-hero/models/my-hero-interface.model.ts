@@ -17,8 +17,8 @@ export interface BaseType {
   options?: string[];
 }
 
-export interface MyHeroId {
-  id: string;
+export interface MyHeroName {
+  name: string;
 }
 
 interface MyHeroExpanded {

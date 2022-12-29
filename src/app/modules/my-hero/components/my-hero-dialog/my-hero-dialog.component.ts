@@ -10,9 +10,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
-import {distinctUntilChanged, filter, map, startWith, take, takeUntil} from "rxjs/operators";
+import { distinctUntilChanged, filter, map, startWith, take, takeUntil } from "rxjs/operators";
 
-import { MyHeroStoreService } from "../../services/my-hero-store.service";
+import { MyHeroStoreService } from "../../store/services/my-hero-store.service";
 import {
   MyHero,
   MyHeroAfterCloseValue,

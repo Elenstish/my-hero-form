@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { MyHeroNode } from "./my-hero-interface.model";
+import { MyHeroNode } from "../../models/my-hero-interface.model";
 
 export const MyHeroStateName = 'myHero';
 
@@ -13,7 +13,7 @@ export interface MyHeroState {
 }
 
 export interface MyHeroListState {
-  isLoading: boolean,
-  error: null | string,
+  isLoading: boolean;
+  error: null | string;
   myHeroListState: MyHeroNode[];
 }

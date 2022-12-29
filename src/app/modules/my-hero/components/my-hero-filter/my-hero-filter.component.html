@@ -1,11 +1,9 @@
-<form [formGroup]="filterForm"
-      (keydown.enter)="searchControl.value ? setSearch() : $event.preventDefault()"
-      autocomplete="off"
-      class="search-form">
+<section class="search-form">
   <mat-form-field  class="search-wrap">
     <mat-icon color="primary" matPrefix>search</mat-icon>
-    <mat-label>Type to search</mat-label>
-    <input matInput type="text" [formControl]="getControl('search')">
+    <mat-label>Type to search by name, synonyms or description</mat-label>
+    <input matInput type="text" [formControl]="searchControl"
+           (keydown.enter)="searchControl.value ? setSearch() : $event.preventDefault()">
     <button *ngIf="searchControl.value !== ''" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
       <mat-icon color="primary" >close</mat-icon>
     </button>
@@ -24,4 +22,4 @@
       + Add New Element
     </button>
   </div>
-</form>
+</section>

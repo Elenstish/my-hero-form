@@ -3,14 +3,14 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { MyHeroState } from "../models/my-hero-state.model";
-import { MyHeroNode } from "../models/my-hero-interface.model";
-import { createMyHero, getMyHeroList } from "../store/actions";
+import { MyHeroNode } from "../../models/my-hero-interface.model";
+import { createMyHero, getMyHeroList, getSearch } from "../actions";
 import {
   selectCreateMyHeroFailure, selectCreateMyHeroLoading,
   selectCreateMyHeroSuccess,
   selectMyHeroList,
   selectMyHeroListLoading
-} from "../store/selectors";
+} from "../selectors";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
@@ -49,5 +49,9 @@ export class MyHeroStoreService {
 
   public getMyHeroListProgress$(): Observable<boolean> {
     return this.store.pipe(select(selectMyHeroListLoading));
+  }
+
+  public getSearch(search: string): void {
+    this.store.dispatch(getSearch({ payload: search }));
   }
 }
