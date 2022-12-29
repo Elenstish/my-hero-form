@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 
-import { MyHeroId, MyHeroNode } from "../../models/my-hero-interface.model";
+import { MyHeroName, MyHeroNode } from "../../models/my-hero-interface.model";
 import { getFailureType, getSuccessType } from "../constants/get-action-type.constants";
 
 const myHeroActionTypes = {
@@ -17,7 +17,7 @@ export const createMyHero = createAction(
 
 export const createMyHeroSuccess = createAction(
   getSuccessType(myHeroActionTypes.createMyHero),
-  props<MyHeroId>()
+  props<MyHeroName>()
 );
 
 export const createMyHeroFailure = createAction(

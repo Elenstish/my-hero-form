@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from "rxjs/operators";
 
-import { MyHeroId, MyHeroNode } from "../../../models/my-hero-interface.model";
+import { MyHeroName, MyHeroNode } from "../../../models/my-hero-interface.model";
 import { MyHeroList } from "../../../constants/my-hero-list-temp.constants";
 
 
@@ -14,20 +13,14 @@ export class MyHeroApiService {
   public myHeroItem: MyHeroNode;
   private newMyHeroList: MyHeroNode[] = [];
 
-  constructor(
-      public httpClient: HttpClient
-  ) {}
+  constructor() {}
 
-  public createMyHero(payload: MyHeroNode): Observable<MyHeroId> {
+  public createMyHero(payload: MyHeroNode): Observable<MyHeroName> {
     this.myHeroItem = payload;
-    const myHeroId: MyHeroId = {
-      id: '1'
+    const myHeroName: MyHeroName = {
+      name: payload.name
     };
-    return of(myHeroId).pipe(delay(500));
-    // const url: string = ('/my-hero');
-    // return this.httpClient.post<MyHeroId>(url, payload, {
-    //   headers: new HttpHeaders({ 'ignore-error-notifications': 'yes' })
-    // });
+    return of(myHeroName).pipe(delay(500));
   }
 
   public getMyHeroList(): Observable<MyHeroNode[]> {

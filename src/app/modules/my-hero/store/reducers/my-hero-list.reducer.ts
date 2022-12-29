@@ -13,7 +13,9 @@ const reducer = createReducer<MyHeroNode[]>(
       return items;
     }),
     on(getSearch, (state, { payload }) =>
-      myHeroList.filter(item => item.name.toLowerCase().includes(payload.toLowerCase()))
+      myHeroList.filter(item => item.name.toLowerCase().includes(payload.toLowerCase())
+      || item.synonyms?.toLowerCase().includes(payload.toLowerCase())
+      || item.description?.toLowerCase().includes(payload.toLowerCase()))
     )
 );
 

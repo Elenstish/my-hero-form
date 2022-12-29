@@ -1,7 +1,7 @@
 <section class="search-form">
   <mat-form-field  class="search-wrap">
     <mat-icon color="primary" matPrefix>search</mat-icon>
-    <mat-label>Type to search</mat-label>
+    <mat-label>Type to search by name, synonyms or description</mat-label>
     <input matInput type="text" [formControl]="searchControl"
            (keydown.enter)="searchControl.value ? setSearch() : $event.preventDefault()">
     <button *ngIf="searchControl.value !== ''" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">

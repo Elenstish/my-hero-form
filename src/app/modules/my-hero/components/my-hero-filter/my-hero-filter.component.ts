@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subject } from "rxjs";
 import { filter, take, takeUntil } from "rxjs/operators";
 
@@ -25,7 +24,6 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
 
   constructor(
       private dialog: MatDialog,
-      private snackBar: MatSnackBar,
 	  private myHeroStoreService: MyHeroStoreService
   ) {
   }
@@ -64,12 +62,6 @@ export class MyHeroFilterComponent implements OnInit, OnDestroy {
           if (data.isClone) {
             this.openMyFormDialog();
           }
-
-          this.snackBar.open(
-              `${data.name} Element was successfully added`,
-              'x',
-              { duration: 5000 }
-              );
         });
   }
 
